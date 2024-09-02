@@ -1,0 +1,170 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(RDApp());
+}
+
+class RDApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Responsive Design for All Devices',
+      home: Responsivedesign(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class Responsivedesign extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, size) {
+        if (size.maxWidth < 700) {
+          // Mobile Layout
+          return Mobile();
+        } else if (size.maxWidth < 1000) {
+          // Tablet Layout
+          return Tablet();
+        } else {
+          // Desktop Layout
+          return Desktop();
+        }
+      },
+    );
+  }
+}
+
+class Desktop extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Desktop',style: TextStyle(fontSize: 30,color: Colors.deepOrange),),
+        backgroundColor: Colors.tealAccent,
+      ),
+    body: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+    NavigationRail(
+    selectedIndex: 0,
+    onDestinationSelected: (int index) {},
+    labelType: NavigationRailLabelType.all,
+    destinations: [
+    NavigationRailDestination(
+    icon: Icon(Icons.home),
+    label: Text('Home'),
+    ),
+    NavigationRailDestination(
+    icon: Icon(Icons.settings),
+    label: Text('Settings'),
+    ),
+    ],
+    ),
+    VerticalDivider(thickness: 1, width: 1),
+    Expanded(
+    child: Center(
+
+    child: Text('FLUTTER WEB BASIC',style: TextStyle(fontSize: 27,color: Colors.black87),),
+
+    ),
+    ),
+    ],
+
+    )
+
+    );
+  }
+}
+
+
+class Mobile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Mobile',
+          style: TextStyle(fontSize: 25),
+        ),
+        backgroundColor: Colors.deepPurple,
+      ),
+      body: Center(
+        child: Text(
+          'FLUTTER WEB BASIC',
+          style: TextStyle(fontSize: 50,color: Colors.black87),
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.tealAccent,
+              ),
+              child: Text(
+                'Mobile Header',
+                style: TextStyle(fontSize: 28),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.search),
+              title: Text('Search'),
+              onTap: () {},
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Tablet extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Tablet',style: TextStyle(fontSize: 30,color: Colors.white),),
+        backgroundColor: Colors.teal,
+      ),
+      body: Row(
+        children: <Widget>[
+          NavigationRail(
+            selectedIndex: 0,
+            onDestinationSelected: (int index) {},
+            labelType: NavigationRailLabelType.all,
+            destinations: [
+              NavigationRailDestination(
+                icon: Icon(Icons.home),
+                label: Text('Home'),
+              ),
+              NavigationRailDestination(
+                icon: Icon(Icons.settings),
+                label: Text('Settings'),
+              ),
+            ],
+          ),
+          VerticalDivider(thickness: 2, width: 2),
+          Expanded(
+            child: Center(
+              child: Text('FLUTTER WEB BASIC',style: TextStyle(fontSize: 35,color: Colors.black87),),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
